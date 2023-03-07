@@ -6,6 +6,7 @@ CREATE_MOVIES_TABLE = "CREATE TABLE IF NOT EXISTS movies (id INTEGER PRIMARY KEY
 INSERT_MOVIE = "INSERT INTO movies (title, year, director, rating) VALUES (?, ?, ?, ?);"
 
 GET_ALL_MOVIES = "SELECT * FROM movies;"
+GET_TOP_MOVIES = "SELECT * FROM movies ORDER BY rating DESC;"
 GET_MOVIES_BY_TITLE = "SELECT * FROM movies WHERE title = ?;"
 GET_BEST_MOVIE_OF_DIRECTOR = """
 SELECT * FROM movies
@@ -32,6 +33,10 @@ def add_movie(connection, title, year, director, rating):
 def get_all_movies(connection):
     with connection:
         return connection.execute(GET_ALL_MOVIES).fetchall()
+
+def get_top_movies(connection):
+    with connection:
+        return connection.execute(GET_TOP_MOVIES).fetchall()
 
 def get_movies_by_name(connection, title):
     with connection:
